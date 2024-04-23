@@ -5,9 +5,14 @@ import 'package:blood_bank/view_request.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class donorhome extends StatelessWidget {
+class donorhome extends StatefulWidget {
   const donorhome({Key? key}) : super(key: key);
 
+  @override
+  State<donorhome> createState() => _donorhomeState();
+}
+
+class _donorhomeState extends State<donorhome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +30,7 @@ class donorhome extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'User id',
+                      'Name',
                       style: TextStyle(
                         color: Color.fromARGB(255, 236, 19, 4),
                         backgroundColor: Colors.white,

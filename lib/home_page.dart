@@ -1,4 +1,5 @@
-import 'package:blood_bank/donor_signup.dart';
+import 'package:blood_bank/donor_signin.dart';
+
 import 'package:blood_bank/recp_sigin.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +16,13 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'LifeDrop',
+              'LIFEDROP',
               style: TextStyle(
                 color: Colors.redAccent,
-                fontSize: 50,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
             Container(
               width: 300,
               height: 300,
@@ -32,7 +32,19 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                'Welcome to LifeDrop Blood Donation App',
+                'HELLO!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.red, // Set text color to red
+                  fontSize: 30, // Set font size
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Welcome To Lifedrop Blood Donation App',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.red, // Set text color to red
@@ -55,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                   ),
                   child: Text(
-                    'Recipient',
+                    'RECIPIENT',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -66,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => donorsignup()),
+                      MaterialPageRoute(builder: (context) => Signin()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -74,13 +86,14 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                   ),
                   child: Text(
-                    'Donor',
+                    'DONOR',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                     ),
                   ),
                 ),
+                SizedBox(height: 20),
               ],
             ),
           ],

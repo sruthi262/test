@@ -1,9 +1,64 @@
+import 'dart:math';
+
+import 'package:blood_bank/auth.dart';
+import 'package:blood_bank/instr.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_bank/donor_signin.dart';
 import 'package:blood_bank/donor_home.dart';
 
-class donorsignup extends StatelessWidget {
+class donorsignup extends StatefulWidget {
   donorsignup({Key? key}) : super(key: key);
+
+  @override
+  State<donorsignup> createState() => _donorsignupState();
+}
+
+class _donorsignupState extends State<donorsignup> {
+  final _auth = AuthService();
+
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController ageController = TextEditingController();
+
+  final TextEditingController bloodGroupController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController phoneController = TextEditingController();
+
+  final TextEditingController locationController = TextEditingController();
+
+  final TextEditingController weightController = TextEditingController();
+
+  final TextEditingController infectionsController = TextEditingController();
+
+  final TextEditingController chronicIllnessController =
+      TextEditingController();
+
+  final TextEditingController cancerController = TextEditingController();
+
+  final TextEditingController bloodDisorderController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    ageController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    locationController.dispose();
+    weightController.dispose();
+    infectionsController.dispose();
+    chronicIllnessController.dispose();
+    cancerController.dispose();
+    bloodDisorderController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +93,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: nameController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Name'),
                 ),
@@ -45,6 +101,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: ageController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Age'),
                 ),
@@ -52,6 +109,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: bloodGroupController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Blood Group'),
                 ),
@@ -59,6 +117,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Email'),
                 ),
@@ -66,6 +125,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: phoneController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Phone'),
                 ),
@@ -73,6 +133,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: locationController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Location'),
                 ),
@@ -80,6 +141,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: weightController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Weight'),
                 ),
@@ -87,6 +149,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: infectionsController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Infections'),
                 ),
@@ -94,6 +157,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: chronicIllnessController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Chronic illness(Heart diseases,Diabetics)'),
@@ -102,6 +166,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: cancerController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Cancer'),
                 ),
@@ -109,13 +174,17 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: bloodDisorderController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Blood Disorder'),
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
+                // Add similar TextField widgets for other fields
+
                 TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Password'),
                 ),
@@ -123,6 +192,7 @@ class donorsignup extends StatelessWidget {
                   height: 20.0,
                 ),
                 TextField(
+                  controller: confirmPasswordController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Confirm Password'),
@@ -144,7 +214,7 @@ class donorsignup extends StatelessWidget {
                         ),
                       ),
                       onPressed: () => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => Signin()))),
+                          MaterialPageRoute(builder: (context) => instruct()))),
                 ),
                 SizedBox(
                   height: 20.0,
@@ -158,8 +228,7 @@ class donorsignup extends StatelessWidget {
                         backgroundColor: Color.fromARGB(255, 179, 15, 3),
                         // Set the button's background color
                       ),
-                      onPressed: () => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => donorhome())),
+                      onPressed: _signup,
                       child: Text(
                         'Sign In',
                         style: TextStyle(
@@ -204,5 +273,23 @@ class donorsignup extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /*goToHome(BuildContext context) => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const donorhome()),
+      );*/
+
+  _signup() async {
+    final user = await _auth.createUserWithEmailAndPassword(
+        emailController.text, passwordController.text);
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const donorhome()),
+      );
+    } else {
+      print("cannot accept");
+    }
   }
 }

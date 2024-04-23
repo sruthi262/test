@@ -1,10 +1,30 @@
+import 'package:blood_bank/auth.dart';
 import 'package:blood_bank/donor_forgot.dart';
 import 'package:blood_bank/donor_home.dart';
 import 'package:blood_bank/donor_signup.dart';
+
 import 'package:flutter/material.dart';
 
-class Signin extends StatelessWidget {
-  Signin({Key? key}) : super(key: key);
+class Signin extends StatefulWidget {
+  @override
+  State<Signin> createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
+  final _auth = AuthService();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  get nameController => null;
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,18 +59,48 @@ class Signin extends StatelessWidget {
                   height: 40.0,
                 ),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Username'),
+                      border: OutlineInputBorder(), hintText: 'Email'),
                 ),
                 SizedBox(
                   height: 40.0,
                 ),
                 TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Password'),
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 20.0,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return donorforget();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Forgot Password',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
                 Center(
                   child: SizedBox(
@@ -61,8 +111,7 @@ class Signin extends StatelessWidget {
                         backgroundColor: Color.fromARGB(255, 179, 15, 3),
                         // Set the button's background color
                       ),
-                      onPressed: () => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => donorhome())),
+                      onPressed: _login,
                       child: Text(
                         'Log In',
                         style: TextStyle(
@@ -105,25 +154,25 @@ class Signin extends StatelessWidget {
                 SizedBox(
                   height: 10.0,
                 ),
-                Center(
-                  child: TextButton(
-                    child: Text(
-                      'Forgot Password',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 205, 7, 7),
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => donorforget())),
-                  ),
-                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  _login() async {
+    final user = await _auth.loginUserWithEmailAndPassword(
+        emailController.text, passwordController.text);
+
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const donorhome()),
+      );
+    } else {
+      print("cannot accept");
+    }
   }
 }

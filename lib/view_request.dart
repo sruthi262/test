@@ -1,3 +1,4 @@
+import 'package:blood_bank/recp_profile.dart';
 import 'package:flutter/material.dart';
 
 class viewrequest extends StatefulWidget {
@@ -30,9 +31,8 @@ class _SignUpFormState extends State<viewrequest> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => recpprofile())),
               child: Text(
                 'OK',
                 style: TextStyle(

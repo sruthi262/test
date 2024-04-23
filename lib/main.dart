@@ -1,6 +1,8 @@
 import 'package:blood_bank/donor_confirm.dart';
 import 'package:blood_bank/donor_home.dart';
+import 'package:blood_bank/firebase_options.dart';
 import 'package:blood_bank/instr.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:blood_bank/donor_signup.dart';
@@ -15,8 +17,13 @@ import 'package:blood_bank/recp_profile.dart';
 import 'package:blood_bank/recp_forgot.dart';
 import 'package:blood_bank/donor_forgot.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then(
+    (FirebaseApp value) => Get.put(AuthenticationRepository()),
+  );
   runApp(GetMaterialApp(
+    
       debugShowCheckedModeBanner: false,
       initialRoute: 'Homepage',
       routes: {
@@ -36,3 +43,5 @@ void main() {
         'donorconfirm': (BuildContext) => donorconfirm(),
       }));
 }
+
+class AuthenticationRepository {}
